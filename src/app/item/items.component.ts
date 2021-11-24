@@ -42,6 +42,10 @@ export class ItemsComponent implements OnInit {
   }
   //////////////////////////////////////////////////////////////////////
   public onTap(args: EventData) {
+    const test = ["a", "b"];
+    const t = test.indexOf("a");
+    const t1 = test.indexOf("c");
+
     if (this._scanner) {
       const scanner = this._scanner.nativeElement as MLKitView;
       if (this._barcodeScannerRunning) {

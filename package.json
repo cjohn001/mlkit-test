@@ -17,8 +17,8 @@
     "@angular/router": "^12.2.0",
     "@nativescript/angular": "^12.2.0",
     "@nativescript/core": "~8.1.1",
-    "@nativescript/mlkit-barcode-scanning": "^1.0.0-alpha.0",
-    "@nativescript/mlkit-core": "^1.0.0-alpha.0",
+    "@nativescript/mlkit-barcode-scanning": "file:../mlkit/dist/packages/mlkit-barcode-scanning",
+    "@nativescript/mlkit-core": "file:../mlkit/dist/packages/mlkit-core",
     "@nativescript/theme": "~3.0.1",
     "rxjs": "~7.3.0",
     "zone.js": "~0.11.4"
