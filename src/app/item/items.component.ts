@@ -2,10 +2,10 @@ import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 
 import {
   BarcodeFormats,
+  DetectionEvent,
   DetectionType,
   MLKitView,
 } from "@nativescript/mlkit-core";
-import { BarcodeResult } from "@nativescript/mlkit-barcode-scanning";
 import { EventData } from "@nativescript/core";
 @Component({
   selector: "ns-items",
@@ -15,6 +15,8 @@ export class ItemsComponent implements OnInit {
   private _barcodeScannerRunning = true;
   public _detectionType: DetectionType = DetectionType.Barcode;
   public _barcode: string;
+  public _pause = true;
+  public _torchEnabled = true;
 
   public _barcodeFormats: BarcodeFormats[];
 
@@ -33,19 +35,26 @@ export class ItemsComponent implements OnInit {
     ];
   }
   //////////////////////////////////////////////////////////////////////
-  public onDetection(data: BarcodeResult, type: DetectionType) {
-    if (type === DetectionType.Barcode) {
-      const barcode: BarcodeResult = data;
+  public onDetection(args: DetectionEvent) {
+    console.log("On Detection is currently never called");
+    if (args.type === DetectionType.Barcode) {
+      const barcode = args.data;
       this._barcode = JSON.stringify(barcode);
-      console.log("Barcode = " + barcode);
+      console.log("Barcode = " + this._barcode);
     }
   }
   //////////////////////////////////////////////////////////////////////
-  public onTap(args: EventData) {
-    const test = ["a", "b"];
-    const t = test.indexOf("a");
-    const t1 = test.indexOf("c");
-
+  public onTapTorch(args: EventData) {
+    if (this._scanner) {
+      const scanner = this._scanner.nativeElement as MLKitView;
+      this._torchEnabled = !this._torchEnabled;
+      scanner.torchOn = this._torchEnabled;
+    }
+  }
+  //////////////////////////////////////////////////////////////////////
+  public onTapPause(args: EventData) {
+    this._pause = !this._pause;
+    /*
     if (this._scanner) {
       const scanner = this._scanner.nativeElement as MLKitView;
       if (this._barcodeScannerRunning) {
@@ -55,5 +64,6 @@ export class ItemsComponent implements OnInit {
       }
       this._barcodeScannerRunning = !this._barcodeScannerRunning;
     }
+    */
   }
 }

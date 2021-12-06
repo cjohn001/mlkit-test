@@ -21,11 +21,14 @@ You can learn more about NativeScript layouts at https://docs.nativescript.org/u
 These components make use of the NativeScript core theme, which styles them with element selectors.
 The theme also provides a set of helper class names such as p-20, h1, h2, and text-center to enhance styling.
 You can learn more about the NativeScript core theme at https://github.com/nativescript/theme
+ [detectionType]="_detectionType"
 -->
-<GridLayout rows="2*,*,*">
-  <MLKitView #idScanner cameraPosition="back" [detectionType]="_detectionType" [barcodeFormats]="_barcodeFormats"
-    (onDetection)="onDetection">
+
+<GridLayout rows="2*,*,*,*">
+  <MLKitView #idScanner [pause]="_pause" cameraPosition="back" detectionType="barcode"
+    [barcodeFormats]="_barcodeFormats" (onDetection)="onDetection($event)">
   </MLKitView>
   <Label row="1" text="{{ 'Barcode: ' + _barcode }}"></Label>
-  <Button row="2" text="toggle" (tap)="onTap($event)" backgroundColor="lightBlue"></Button>
+  <Button row="2" text="Toogle camera pause" (tap)="onTapPause($event)" backgroundColor="lightBlue"></Button>
+  <Button row="3" text="toggle torch" (tap)="onTapTorch($event)" backgroundColor="lightBlue"></Button>
 </GridLayout>
