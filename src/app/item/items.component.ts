@@ -45,11 +45,14 @@ export class ItemsComponent implements OnInit {
   }
   //////////////////////////////////////////////////////////////////////
   public onTapTorch(args: EventData) {
+    this._torchEnabled = !this._torchEnabled;
+    /*
     if (this._scanner) {
       const scanner = this._scanner.nativeElement as MLKitView;
       this._torchEnabled = !this._torchEnabled;
       scanner.torchOn = this._torchEnabled;
     }
+    */
   }
   //////////////////////////////////////////////////////////////////////
   public onTapPause(args: EventData) {
@@ -65,5 +68,14 @@ export class ItemsComponent implements OnInit {
       this._barcodeScannerRunning = !this._barcodeScannerRunning;
     }
     */
+  }
+  //////////////////////////////////////////////////////////////////////
+  public onMLKitViewLoaded(args: any) {
+    if (global.isAndroid) {
+      const scanner = args.object as MLKitView;
+      if (!scanner.hasCameraPermission()) {
+        scanner.requestCameraPermission();
+      }
+    }
   }
 }
