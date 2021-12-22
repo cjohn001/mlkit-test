@@ -26,7 +26,8 @@ You can learn more about the NativeScript core theme at https://github.com/nativ
 
 <GridLayout rows="2*,*,*,*">
   <MLKitView #idScanner [pause]="_pause" [torchOn]="_torchEnabled" cameraPosition="back" detectionType="barcode"
-    [barcodeFormats]="_barcodeFormats" (onDetection)="onDetection($event)" (loaded)="onMLKitViewLoaded($event)">
+    cameraPosition="back" (detection)="onDetection($event)" barcodeFormats="_barcodeFormats"
+    (loaded)="onMLKitViewLoaded($event)">
   </MLKitView>
   <Label row="1" text="{{ 'Barcode: ' + _barcode }}"></Label>
   <Button row="2" text="Toogle camera pause" (tap)="onTapPause($event)" backgroundColor="lightBlue"></Button>

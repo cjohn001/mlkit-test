@@ -12,7 +12,6 @@ import { EventData } from "@nativescript/core";
   templateUrl: "./items.component.html",
 })
 export class ItemsComponent implements OnInit {
-  private _barcodeScannerRunning = true;
   public _detectionType: DetectionType = DetectionType.Barcode;
   public _barcode: string;
   public _pause = true;
@@ -36,7 +35,6 @@ export class ItemsComponent implements OnInit {
   }
   //////////////////////////////////////////////////////////////////////
   public onDetection(args: DetectionEvent) {
-    console.log("On Detection is currently never called");
     if (args.type === DetectionType.Barcode) {
       const barcode = args.data;
       this._barcode = JSON.stringify(barcode);
@@ -46,28 +44,10 @@ export class ItemsComponent implements OnInit {
   //////////////////////////////////////////////////////////////////////
   public onTapTorch(args: EventData) {
     this._torchEnabled = !this._torchEnabled;
-    /*
-    if (this._scanner) {
-      const scanner = this._scanner.nativeElement as MLKitView;
-      this._torchEnabled = !this._torchEnabled;
-      scanner.torchOn = this._torchEnabled;
-    }
-    */
   }
   //////////////////////////////////////////////////////////////////////
   public onTapPause(args: EventData) {
     this._pause = !this._pause;
-    /*
-    if (this._scanner) {
-      const scanner = this._scanner.nativeElement as MLKitView;
-      if (this._barcodeScannerRunning) {
-        scanner.stopPreview();
-      } else {
-        scanner.startPreview();
-      }
-      this._barcodeScannerRunning = !this._barcodeScannerRunning;
-    }
-    */
   }
   //////////////////////////////////////////////////////////////////////
   public onMLKitViewLoaded(args: any) {
