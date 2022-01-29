@@ -51,11 +51,9 @@ export class ItemsComponent implements OnInit {
   }
   //////////////////////////////////////////////////////////////////////
   public onMLKitViewLoaded(args: any) {
-    if (global.isAndroid) {
-      const scanner = args.object as MLKitView;
-      if (!scanner.hasCameraPermission()) {
-        scanner.requestCameraPermission();
-      }
+    const scanner = args.object as MLKitView;
+    if (!scanner.hasCameraPermission()) {
+      scanner.requestCameraPermission();
     }
   }
 }
